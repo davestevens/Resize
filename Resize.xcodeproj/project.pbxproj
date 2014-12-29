@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16092BC71A51BAA200145CF8 /* Resize.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 16092BC61A51BAA200145CF8 /* Resize.iconset */; };
 		16D31FE61A519C7500E4F832 /* ResizeHotKeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D31FE51A519C7500E4F832 /* ResizeHotKeyManager.m */; };
 		16D31FE81A519D4600E4F832 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16D31FE71A519D4600E4F832 /* Carbon.framework */; };
 		16D96BAB1A34936100DC7771 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16D96BAA1A34936100DC7771 /* Cocoa.framework */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16092BC61A51BAA200145CF8 /* Resize.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Resize.iconset; sourceTree = "<group>"; };
 		16D31FE41A519C7500E4F832 /* ResizeHotKeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResizeHotKeyManager.h; sourceTree = "<group>"; };
 		16D31FE51A519C7500E4F832 /* ResizeHotKeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResizeHotKeyManager.m; sourceTree = "<group>"; };
 		16D31FE71A519D4600E4F832 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -116,6 +118,7 @@
 		16D96BB11A34936100DC7771 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				16092BC61A51BAA200145CF8 /* Resize.iconset */,
 				16D96BB21A34936100DC7771 /* Resize-Info.plist */,
 				16ED6C111A51618F00301C33 /* Resize.png */,
 				16D96BB31A34936100DC7771 /* InfoPlist.strings */,
@@ -184,6 +187,7 @@
 				16D96BC11A34936100DC7771 /* MainMenu.xib in Resources */,
 				16ED6C121A51618F00301C33 /* Resize.png in Resources */,
 				16F6A9F91A51628E0034A4B3 /* ResizeConfig.plist in Resources */,
+				16092BC71A51BAA200145CF8 /* Resize.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
