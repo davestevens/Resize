@@ -112,8 +112,8 @@
     }
     CGRect currentScreen = [self getScreen:window];
 
-    for(NSValue *screen in self.screens) {
-        CGRect screenRect = [screen rectValue];
+    for(id screen in self.screens) {
+        CGRect screenRect = [[screen valueForKey:@"frame"] rectValue];
         if (screenRect.origin.x < currentScreen.origin.x) {
             [self resize:screenRect:window];
             break;
@@ -129,8 +129,8 @@
     }
     CGRect currentScreen = [self getScreen:window];
 
-    for(NSValue *screen in self.screens) {
-        CGRect screenRect = [screen rectValue];
+    for(id screen in self.screens) {
+        CGRect screenRect = [[screen valueForKey:@"frame"] rectValue];
         if (screenRect.origin.x > currentScreen.origin.x) {
             [self resize:screenRect:window];
             break;
@@ -160,8 +160,6 @@
 
 - (NSRect)getScreen:(AXUIElementRef)window
 {
-    self.screens = [self screens];
-
     CGSize windowSize;
     CGPoint windowPosition;
     AXValueRef temp;
@@ -189,8 +187,12 @@
 
     for(NSScreen *screen in NSScreen.screens) {
         CGRect frame = screen.frame;
-        CGRect rect = CGRectMake(frame.origin.x, [self invertYOrigin:&frame], frame.size.width, frame.size.height);
-        [screens addObject:[NSValue valueWithRect:rect]];
+        CGRect visibleFrame = screen.visibleFrame;
+        frame = CGRectMake(frame.origin.x, [self invertYOrigin:&frame], frame.size.width, frame.size.height);
+        visibleFrame = CGRectMake(visibleFrame.origin.x, [self invertYOrigin:&visibleFrame], visibleFrame.size.width, visibleFrame.size.height);
+
+        NSDictionary *frames = @{ @"frame": [NSValue valueWithRect:frame], @"visible": [NSValue valueWithRect:visibleFrame] };
+        [screens addObject:frames];
     }
 
     return screens;
@@ -206,14 +208,16 @@
 
 - (CGRect)currentScreen:(CGRect)windowRect
 {
-    for(NSValue *screen in self.screens) {
-        CGRect screenRect = [screen rectValue];
+    NSMutableArray *screens = self.screens;
+
+    for(id screen in screens) {
+        CGRect screenRect = [[screen valueForKey:@"frame"] rectValue];
         if ([self CGRectContainsCGRect:screenRect : windowRect]) {
-            return screenRect;
+            return [[screen valueForKey:@"visible"] rectValue];
         }
     }
     // TODO: find closest top left corner / percentage of window in screen?
-    return [[self.screens objectAtIndex:0] rectValue];
+    return [[[screens objectAtIndex:0] valueForKey:@"visible"] rectValue];
 }
 
 - (AXUIElementRef)getWindow
