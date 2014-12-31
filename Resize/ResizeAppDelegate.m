@@ -10,25 +10,20 @@
 
 @implementation ResizeAppDelegate
 
-- (void)resize:(id)sender
-{
-    NSDictionary *item = (NSDictionary *)[sender representedObject];
-    NSLog(@"Resize: %@", [item valueForKey:@"label"]);
-
-    SEL selector = NSSelectorFromString([item valueForKey:@"selector"]);
-    [self.resizeWindow performSelector:selector];
-}
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.resizeWindow = [ResizeWindow new];
-
     // Initialize Status Bar
-    ResizeStatusBar *statusBar = [ResizeStatusBar new];
+    ResizeStatusBar *statusBar = [[ResizeStatusBar alloc] init];
     self.statusItem = [statusBar setupStatusItem];
 
     // Initialize HotKeys
-    self.hotKeyManager = [ResizeHotKeyManager new];
+    self.hotKeyManager = [[ResizeHotKeyManager alloc] init];
+}
+
+- (void)statusItemClicked:(id)sender
+{
+    NSDictionary *item = (NSDictionary *)[sender representedObject];
+    [ResizeWindow performResize:[item valueForKey:@"selector"]];
 }
 
 @end

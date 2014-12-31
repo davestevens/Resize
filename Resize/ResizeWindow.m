@@ -10,6 +10,13 @@
 
 @implementation ResizeWindow
 
++(void)performResize:(NSString *)method
+{
+    NSLog(@"performResize (%@)", method);
+    ResizeWindow *resizeWindow = [self new];
+    [resizeWindow performSelector:NSSelectorFromString(method)];
+}
+
 - (void)left
 {
     NSLog(@"left");

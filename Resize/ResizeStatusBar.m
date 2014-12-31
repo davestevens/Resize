@@ -59,9 +59,14 @@
 
     for (id object in array) {
         for (id item in object) {
-            NSMenuItem *tItem = [self.menu addItemWithTitle:[item valueForKey:@"label"] action:@selector(resize:) keyEquivalent: [self getKeyEquivalent:[item valueForKey:@"key"]]];
+            NSMenuItem *tItem = [[NSMenuItem alloc] init];
+            [tItem setAction: @selector(statusItemClicked:)];
+            [tItem setTitle: [item valueForKey:@"label"]];
+            [tItem setKeyEquivalent: [self getKeyEquivalent:[item valueForKey:@"key"]]];
             [tItem setKeyEquivalentModifierMask: [self buildModifierKeyMask:[item valueForKey:@"modifiers"]]];
-            [tItem setRepresentedObject:item];
+            [tItem setRepresentedObject: item];
+
+            [self.menu addItem:tItem];
         }
         [self addSeparator];
     }

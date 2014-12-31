@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSMutableArray *screens;
 
++(void)performResize:(NSString *)method;
 - (void)left;
 - (void)right;
 - (void)top;
