@@ -18,7 +18,6 @@
 
 - (void)left
 {
-    NSLog(@"left");
     AXUIElementRef window = [self getWindow];
     CGRect screen = [self getScreen:window];
 
@@ -29,7 +28,6 @@
 
 - (void)right
 {
-    NSLog(@"right");
     AXUIElementRef window = [self getWindow];
     CGRect screen = [self getScreen:window];
 
@@ -41,7 +39,6 @@
 
 - (void)top
 {
-    NSLog(@"top");
     AXUIElementRef window = [self getWindow];
     CGRect screen = [self getScreen:window];
 
@@ -52,7 +49,6 @@
 
 - (void)bottom
 {
-    NSLog(@"bottom");
     AXUIElementRef window = [self getWindow];
     CGRect screen = [self getScreen:window];
 
@@ -64,7 +60,6 @@
 
 - (void)fullscreen
 {
-    NSLog(@"fullscreen");
     AXUIElementRef window = [self getWindow];
     CGRect screen = [self getScreen:window];
 
@@ -73,7 +68,6 @@
 
 - (void)center
 {
-    NSLog(@"center");
     AXUIElementRef window = [self getWindow];
     CGRect screen = [self getScreen:window];
 
@@ -94,7 +88,6 @@
 
 - (void)moveLeft
 {
-    NSLog(@"moveLeft");
     AXUIElementRef window = [self getWindow];
     CGRect currentScreen = [self getScreen:window];
 
@@ -109,7 +102,6 @@
 
 - (void)moveRight
 {
-    NSLog(@"moveRight");
     AXUIElementRef window = [self getWindow];
     CGRect currentScreen = [self getScreen:window];
 
@@ -124,8 +116,7 @@
 
 - (void)resize:(CGRect)screen : (AXUIElementRef)window
 {
-    NSLog(@"Changing window size to: %fx%f", screen.size.width, screen.size.height);
-    NSLog(@"Changing window position to: %f, %f", screen.origin.x, screen.origin.y);
+    NSLog(@"Resizing window to: %.0fx%.0f (%.0f,%0.f)", screen.size.width, screen.size.height, screen.origin.x, screen.origin.y);
 
     AXValueRef temp;
     temp = AXValueCreate(kAXValueCGSizeType, &screen.size);
@@ -178,8 +169,6 @@
         [screens addObject:[NSValue valueWithRect:rect]];
     }
 
-    NSLog(@"Screens: %@", screens);
-
     return screens;
 }
 
@@ -196,7 +185,6 @@
     for(NSValue *screen in self.screens) {
         CGRect screenRect = [screen rectValue];
         if ([self CGRectContainsCGRect:screenRect : windowRect]) {
-            NSLog(@"window in screen (%f, %f)", screenRect.size.width, screenRect.size.height);
             return screenRect;
         }
     }
@@ -234,7 +222,6 @@
     GetFrontProcess(&psn);
     GetProcessPID(&psn, &pid);
     application = AXUIElementCreateApplication(pid);
-    NSLog(@"app: %@", application);
 
     {
         AXError err;
