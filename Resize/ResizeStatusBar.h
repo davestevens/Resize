@@ -14,7 +14,6 @@
 @property NSMenu *menu;
 @property NSStatusItem *statusItem;
 @property NSDictionary *modifiers;
-@property NSDictionary *keys;
 
 - (id)initWithStatusItem:(NSStatusItem *)statusItem;
 - (void)build;
