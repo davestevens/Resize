@@ -13,7 +13,9 @@
 @interface ResizeAppDelegate : NSObject <NSApplicationDelegate>
 
 @property NSStatusItem *statusItem;
-@property ResizeWindow *resizeWindow;
-@property ResizeHotKeyManager *hotKeyManager;
+@property ResizeStatusBar *resizeStatusBar;
+@property ResizeHotKeyManager *resizeHotKeyManager;
+
+- (void)statusItemClicked:(id)sender;
 
 @end

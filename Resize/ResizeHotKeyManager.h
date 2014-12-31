@@ -13,6 +13,5 @@
 
 @property NSDictionary *modifiers;
 @property (nonatomic) NSMutableArray *mapping;
-@property ResizeWindow *resizeWindow;
 
 @end

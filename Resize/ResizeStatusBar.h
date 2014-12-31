@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ResizeWindow.h"
 
 @interface ResizeStatusBar : NSObject
 
 @property NSMenu *menu;
 @property NSStatusItem *statusItem;
 @property NSDictionary *modifiers;
-@property NSDictionary *keys;
 
-- (NSStatusItem *)setupStatusItem;
+- (id)initWithStatusItem:(NSStatusItem *)statusItem;
+- (void)build;
 
 @end

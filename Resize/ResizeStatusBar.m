@@ -12,14 +12,27 @@
 
 - (id)init
 {
+    NSStatusItem *statusItem = [NSStatusItem new];
+    return [self initWithStatusItem:statusItem];
+}
+
+- (id)initWithStatusItem:(NSStatusItem *)statusItem
+{
     if (self = [super init]) {
+        self.statusItem = statusItem;
         self.menu = [[NSMenu alloc] initWithTitle:@""];
         [self.menu setAutoenablesItems:YES];
         self.modifiers = [self initializeModifiers];
-        self.keys = [self initializeKeys];
     }
 
     return self;
+}
+
+- (void)build
+{
+    [self addOptions];
+    [self addAppMenuItems];
+    [self addToStatusBar];
 }
 
 - (NSDictionary *)initializeModifiers
@@ -31,27 +44,6 @@
              };
 }
 
-- (NSDictionary *)initializeKeys
-{
-    return @{
-             @126: @"", // up
-             @125: @"", // down
-             @124: @"", // right
-             @123: @"", // left
-             @46: @"m",
-             @8: @"c"
-             };
-}
-
-- (NSStatusItem *)setupStatusItem
-{
-    [self addOptions];
-    [self addAppMenuItems];
-    [self addToStatusBar];
-
-    return self.statusItem;
-}
-
 - (void)addOptions
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"ResizeConfig" ofType:@"plist"];
@@ -59,9 +51,14 @@
 
     for (id object in array) {
         for (id item in object) {
-            NSMenuItem *tItem = [self.menu addItemWithTitle:[item valueForKey:@"label"] action:@selector(resize:) keyEquivalent: [self getKeyEquivalent:[item valueForKey:@"key"]]];
+            NSMenuItem *tItem = [[NSMenuItem alloc] init];
+            [tItem setAction: @selector(statusItemClicked:)];
+            [tItem setTitle: [item valueForKey:@"label"]];
+            [tItem setKeyEquivalent: [self createStringForKey:[[item valueForKey:@"key"] integerValue]]];
             [tItem setKeyEquivalentModifierMask: [self buildModifierKeyMask:[item valueForKey:@"modifiers"]]];
-            [tItem setRepresentedObject:item];
+            [tItem setRepresentedObject: item];
+
+            [self.menu addItem:tItem];
         }
         [self addSeparator];
     }
@@ -75,11 +72,6 @@
     }
 
     return keyMask;
-}
-
-- (NSString *)getKeyEquivalent:(NSNumber *)keyCode
-{
-    return self.keys[keyCode];
 }
 
 - (void)addSeparator
@@ -101,6 +93,34 @@
     [self.statusItem setToolTip:@"Resize"];
     [self.statusItem setHighlightMode:YES];
     [self.statusItem setMenu:self.menu];
+}
+
+- (NSString *)createStringForKey:(CGKeyCode)keyCode
+{
+    TISInputSourceRef currentKeyboard = TISCopyCurrentKeyboardInputSource();
+    CFDataRef layoutData =
+    TISGetInputSourceProperty(currentKeyboard,
+                              kTISPropertyUnicodeKeyLayoutData);
+    const UCKeyboardLayout *keyboardLayout =
+    (const UCKeyboardLayout *)CFDataGetBytePtr(layoutData);
+
+    UInt32 keysDown = 0;
+    UniChar chars[4];
+    UniCharCount realLength;
+
+    UCKeyTranslate(keyboardLayout,
+                   keyCode,
+                   kUCKeyActionDisplay,
+                   0,
+                   LMGetKbdType(),
+                   kUCKeyTranslateNoDeadKeysBit,
+                   &keysDown,
+                   sizeof(chars) / sizeof(chars[0]),
+                   &realLength,
+                   chars);
+    CFRelease(currentKeyboard);
+
+    return (NSString *)CFBridgingRelease(CFStringCreateWithCharacters(kCFAllocatorDefault, chars, 1));
 }
 
 @end

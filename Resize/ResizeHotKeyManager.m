@@ -7,6 +7,7 @@
 //
 
 #import "ResizeHotKeyManager.h"
+#import "ResizeWindow.h"
 
 @implementation ResizeHotKeyManager
 
@@ -15,7 +16,6 @@
     if (self = [super init]) {
         self.modifiers = [self initializeModifiers];
         self.mapping = [[NSMutableArray alloc] init];
-        self.resizeWindow = [ResizeWindow new];
         [self initializeHotKeys];
     }
 
@@ -78,8 +78,7 @@
 - (void)performResize:(int)index
 {
     NSDictionary *item = (NSDictionary *)[self mapping][index];
-    SEL selector = NSSelectorFromString([item valueForKey:@"selector"]);
-    [self.resizeWindow performSelector:selector];
+    [ResizeWindow performResize:[item valueForKey:@"selector"]];
 }
 
 OSStatus onHotKeyEvent(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
