@@ -16,7 +16,6 @@
     if (self = [super init]) {
         self.modifiers = [self initializeModifiers];
         self.mapping = [[NSMutableArray alloc] init];
-        self.resizeWindow = [ResizeWindow new];
         [self initializeHotKeys];
     }
 

@@ -13,11 +13,11 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Initialize Status Bar
-    ResizeStatusBar *statusBar = [[ResizeStatusBar alloc] init];
-    self.statusItem = [statusBar setupStatusItem];
+    self.resizeStatusBar = [[ResizeStatusBar alloc] initWithStatusItem:self.statusItem];
+    [self.resizeStatusBar build];
 
     // Initialize HotKeys
-    self.hotKeyManager = [[ResizeHotKeyManager alloc] init];
+    self.resizeHotKeyManager = [[ResizeHotKeyManager alloc] init];
 }
 
 - (void)statusItemClicked:(id)sender

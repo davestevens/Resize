@@ -12,7 +12,14 @@
 
 - (id)init
 {
+    NSStatusItem *statusItem = [NSStatusItem new];
+    return [self initWithStatusItem:statusItem];
+}
+
+- (id)initWithStatusItem:(NSStatusItem *)statusItem
+{
     if (self = [super init]) {
+        self.statusItem = statusItem;
         self.menu = [[NSMenu alloc] initWithTitle:@""];
         [self.menu setAutoenablesItems:YES];
         self.modifiers = [self initializeModifiers];
@@ -20,6 +27,13 @@
     }
 
     return self;
+}
+
+- (void)build
+{
+    [self addOptions];
+    [self addAppMenuItems];
+    [self addToStatusBar];
 }
 
 - (NSDictionary *)initializeModifiers
@@ -41,15 +55,6 @@
              @46: @"m",
              @8: @"c"
              };
-}
-
-- (NSStatusItem *)setupStatusItem
-{
-    [self addOptions];
-    [self addAppMenuItems];
-    [self addToStatusBar];
-
-    return self.statusItem;
 }
 
 - (void)addOptions

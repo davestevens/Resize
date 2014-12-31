@@ -16,6 +16,7 @@
 @property NSDictionary *modifiers;
 @property NSDictionary *keys;
 
-- (NSStatusItem *)setupStatusItem;
+- (id)initWithStatusItem:(NSStatusItem *)statusItem;
+- (void)build;
 
 @end

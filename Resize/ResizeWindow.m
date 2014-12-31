@@ -13,8 +13,7 @@
 +(void)performResize:(NSString *)method
 {
     NSLog(@"performResize (%@)", method);
-    ResizeWindow *resizeWindow = [self new];
-    [resizeWindow performSelector:NSSelectorFromString(method)];
+    [[self new] performSelector:NSSelectorFromString(method)];
 }
 
 - (void)left
