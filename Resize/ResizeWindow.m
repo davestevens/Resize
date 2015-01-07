@@ -19,6 +19,9 @@
 - (void)left
 {
     AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
     CGRect screen = [self getScreen:window];
 
     screen.size.width /= 2;
@@ -29,6 +32,9 @@
 - (void)right
 {
     AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
     CGRect screen = [self getScreen:window];
 
     screen.origin.x += (screen.size.width / 2);
@@ -40,6 +46,9 @@
 - (void)top
 {
     AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
     CGRect screen = [self getScreen:window];
 
     screen.size.height /= 2;
@@ -50,6 +59,9 @@
 - (void)bottom
 {
     AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
     CGRect screen = [self getScreen:window];
 
     screen.origin.y = screen.size.height / 2;
@@ -61,6 +73,9 @@
 - (void)fullscreen
 {
     AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
     CGRect screen = [self getScreen:window];
 
     [self resize:screen:window];
@@ -69,6 +84,9 @@
 - (void)center
 {
     AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
     CGRect screen = [self getScreen:window];
 
     CGSize windowSize;
@@ -89,6 +107,9 @@
 - (void)moveLeft
 {
     AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
     CGRect currentScreen = [self getScreen:window];
 
     for(NSValue *screen in self.screens) {
@@ -103,6 +124,9 @@
 - (void)moveRight
 {
     AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
     CGRect currentScreen = [self getScreen:window];
 
     for(NSValue *screen in self.screens) {
@@ -204,10 +228,9 @@
         AXError err;
         CFStringRef windowTitle;
         err = AXUIElementCopyAttributeValue(window, kAXTitleAttribute, (CFTypeRef *)&windowTitle);
-        if(err) {
-            NSLog(@"AXUIElementCopyAttributeValue: %d", err);
+        if(!err) {
+            NSLog(@"Window: %@", windowTitle);
         }
-        NSLog(@"Window: %@", windowTitle);
     }
 
     return window;
@@ -227,10 +250,9 @@
         AXError err;
         CFStringRef appTitle;
         err = AXUIElementCopyAttributeValue(application, kAXTitleAttribute, (CFTypeRef *)&appTitle);
-        if(err) {
-            NSLog(@"AXUIElementCopyAttributeValue: %d", err);
+        if(!err) {
+            NSLog(@"App: %@", appTitle);
         }
-        NSLog(@"App: %@", appTitle);
     }
 
     return application;
