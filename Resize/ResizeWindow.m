@@ -70,6 +70,66 @@
     [self resize:screen:window];
 }
 
+- (void)top_left
+{
+    AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
+    CGRect screen = [self getScreen:window];
+
+    screen.size.width /= 2;
+    screen.size.height /= 2;
+
+    [self resize:screen:window];
+}
+
+- (void)bottom_left
+{
+    AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
+    CGRect screen = [self getScreen:window];
+
+    screen.origin.y = screen.size.height / 2;
+    screen.size.width /= 2;
+    screen.size.height /= 2;
+
+    [self resize:screen:window];
+}
+
+- (void)top_right
+{
+    AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
+    CGRect screen = [self getScreen:window];
+
+    screen.origin.x += (screen.size.width / 2);
+    screen.size.width /= 2;
+    screen.size.height /= 2;
+
+    [self resize:screen:window];
+}
+
+- (void)bottom_right
+{
+    AXUIElementRef window = [self getWindow];
+    if (window == NULL) {
+        return;
+    }
+    CGRect screen = [self getScreen:window];
+
+    screen.origin.x += (screen.size.width / 2);
+    screen.origin.y = screen.size.height / 2;
+    screen.size.width /= 2;
+    screen.size.height /= 2;
+
+    [self resize:screen:window];
+}
+
 - (void)fullscreen
 {
     AXUIElementRef window = [self getWindow];

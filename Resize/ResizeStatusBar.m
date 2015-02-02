@@ -40,7 +40,8 @@
     return @{
              @"CMD": [NSNumber numberWithInt:NSCommandKeyMask],
              @"ALT": [NSNumber numberWithInt:NSAlternateKeyMask],
-             @"CTRL": [NSNumber numberWithInt:NSControlKeyMask]
+             @"CTRL": [NSNumber numberWithInt:NSControlKeyMask],
+             @"SHIFT": [NSNumber numberWithInt:NSShiftKeyMask]
              };
 }
 

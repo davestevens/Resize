@@ -27,7 +27,8 @@
     return @{
              @"CMD": [NSNumber numberWithInt:cmdKey],
              @"ALT": [NSNumber numberWithInt:optionKey],
-             @"CTRL": [NSNumber numberWithInt:controlKey]
+             @"CTRL": [NSNumber numberWithInt:controlKey],
+             @"SHIFT": [NSNumber numberWithInt:shiftKey]
              };
 }
 

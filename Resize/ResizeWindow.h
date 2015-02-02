@@ -15,6 +15,10 @@
 - (void)right;
 - (void)top;
 - (void)bottom;
+- (void)top_left;
+- (void)bottom_left;
+- (void)top_right;
+- (void)bottom_right;
 - (void)fullscreen;
 - (void)center;
 - (void)moveLeft;

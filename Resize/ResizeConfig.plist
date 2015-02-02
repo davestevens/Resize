@@ -63,6 +63,62 @@
 	<array>
 		<dict>
 			<key>selector</key>
+			<string>top_left</string>
+			<key>modifiers</key>
+			<array>
+				<string>CMD</string>
+				<string>CTRL</string>
+			</array>
+			<key>key</key>
+			<integer>123</integer>
+			<key>label</key>
+			<string>Top Left</string>
+		</dict>
+		<dict>
+			<key>selector</key>
+			<string>bottom_left</string>
+			<key>modifiers</key>
+			<array>
+				<string>CMD</string>
+				<string>CTRL</string>
+				<string>SHIFT</string>
+			</array>
+			<key>key</key>
+			<integer>123</integer>
+			<key>label</key>
+			<string>Bottom Left</string>
+		</dict>
+		<dict>
+			<key>selector</key>
+			<string>top_right</string>
+			<key>modifiers</key>
+			<array>
+				<string>CMD</string>
+				<string>CTRL</string>
+			</array>
+			<key>key</key>
+			<integer>124</integer>
+			<key>label</key>
+			<string>Top Right</string>
+		</dict>
+		<dict>
+			<key>selector</key>
+			<string>bottom_right</string>
+			<key>modifiers</key>
+			<array>
+				<string>CMD</string>
+				<string>CTRL</string>
+				<string>SHIFT</string>
+			</array>
+			<key>key</key>
+			<integer>124</integer>
+			<key>label</key>
+			<string>Bottom Right</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>selector</key>
 			<string>fullscreen</string>
 			<key>modifiers</key>
 			<array>
