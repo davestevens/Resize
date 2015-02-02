@@ -38,11 +38,11 @@
 - (NSDictionary *)initializeModifiers
 {
     return @{
-             @"CMD": [NSNumber numberWithInt:NSCommandKeyMask],
-             @"ALT": [NSNumber numberWithInt:NSAlternateKeyMask],
-             @"CTRL": [NSNumber numberWithInt:NSControlKeyMask],
-             @"SHIFT": [NSNumber numberWithInt:NSShiftKeyMask]
-             };
+             @"CMD": @(NSCommandKeyMask),
+             @"ALT": @(NSAlternateKeyMask),
+             @"CTRL": @(NSControlKeyMask),
+             @"SHIFT": @(NSShiftKeyMask)
+            };
 }
 
 - (void)addOptions

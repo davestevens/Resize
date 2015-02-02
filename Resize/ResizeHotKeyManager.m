@@ -25,10 +25,10 @@
 - (NSDictionary *)initializeModifiers
 {
     return @{
-             @"CMD": [NSNumber numberWithInt:cmdKey],
-             @"ALT": [NSNumber numberWithInt:optionKey],
-             @"CTRL": [NSNumber numberWithInt:controlKey],
-             @"SHIFT": [NSNumber numberWithInt:shiftKey]
+             @"CMD": @(cmdKey),
+             @"ALT": @(optionKey),
+             @"CTRL": @(controlKey),
+             @"SHIFT": @(shiftKey)
              };
 }
 
